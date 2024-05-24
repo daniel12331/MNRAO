@@ -16,7 +16,7 @@ public class RUDataSimulator {
     Node node4 = new Node(4, 104);
     Node node5 = new Node(1, 105);
 
-
+/*
     public void generateNodeData() {
         while(true) {
             int randomNode = getRandomNode();
@@ -96,5 +96,5 @@ public class RUDataSimulator {
 
     private double generateUsage(double min, double max) {
         return min + (max - min) * random.nextDouble();
-    }
+    } */
 }
