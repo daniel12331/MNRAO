@@ -14,16 +14,9 @@ public class Node {
     private double bandwithAllocated;
     private LocalDateTime timestamp;
 
-    public Node(int nodeId, int networkId, double cpuUsage, double memoryUsage, double bandwithUsage, double cpuAllocated, double memoryAllocated, double bandwithAllocated, LocalDateTime timestamp) {
+    public Node(int nodeId, int networkId) {
         this.nodeId = nodeId;
         this.networkId = networkId;
-        this.cpuUsage = cpuUsage;
-        this.memoryUsage = memoryUsage;
-        this.bandwithUsage = bandwithUsage;
-        this.cpuAllocated = cpuAllocated;
-        this.memoryAllocated = memoryAllocated;
-        this.bandwithAllocated = bandwithAllocated;
-        this.timestamp = timestamp;
     }
 
     public Node() {
@@ -99,5 +92,20 @@ public class Node {
 
     public void setMemoryAllocated(double memoryAllocated) {
         this.memoryAllocated = memoryAllocated;
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "nodeId=" + nodeId +
+                ", networkId=" + networkId +
+                ", cpuUsage=" + cpuUsage +
+                ", memoryUsage=" + memoryUsage +
+                ", bandwithUsage=" + bandwithUsage +
+                ", cpuAllocated=" + cpuAllocated +
+                ", memoryAllocated=" + memoryAllocated +
+                ", bandwithAllocated=" + bandwithAllocated +
+                ", timestamp=" + timestamp +
+                '}';
     }
 }
