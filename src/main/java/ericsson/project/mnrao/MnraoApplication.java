@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class MnraoApplication {
-
+	//new sonar test
 	public static void main(String[] args) {
 		SpringApplication.run(MnraoApplication.class, args);
 	}
