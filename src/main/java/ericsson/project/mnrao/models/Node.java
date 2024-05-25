@@ -8,25 +8,37 @@ public class Node {
     private int networkId;
     private double cpuUsage;
     private double memoryUsage;
-    private double bandwithUsage;
+    private double bandwidthUsage;
     private double cpuAllocated;
     private double memoryAllocated;
-    private double bandwithAllocated;
+    private double bandwidthAllocated;
     private LocalDateTime timestamp;
 
-    public Node(int nodeId, int networkId, double cpuUsage, double memoryUsage, double bandwithUsage, double cpuAllocated, double memoryAllocated, double bandwithAllocated, LocalDateTime timestamp) {
+    public Node() {
+    }
+
+    public Node(int nodeId, int networkId, double cpuUsage, double memoryUsage, double bandwidthUsage, double cpuAllocated, double memoryAllocated, double bandwidthAllocated) {
         this.nodeId = nodeId;
         this.networkId = networkId;
         this.cpuUsage = cpuUsage;
         this.memoryUsage = memoryUsage;
-        this.bandwithUsage = bandwithUsage;
+        this.bandwidthUsage = bandwidthUsage;
         this.cpuAllocated = cpuAllocated;
         this.memoryAllocated = memoryAllocated;
-        this.bandwithAllocated = bandwithAllocated;
-        this.timestamp = timestamp;
+        this.bandwidthAllocated = bandwidthAllocated;
+        this.timestamp = LocalDateTime.now();
     }
 
-    public Node() {
+    public Node(int nodeId, int networkId, double cpuUsage, double memoryUsage, double bandwidthUsage, double memoryAllocated, double bandwidthAllocated) {
+        this.nodeId = nodeId;
+        this.networkId = networkId;
+        this.cpuUsage = cpuUsage;
+        this.memoryUsage = memoryUsage;
+        this.bandwidthUsage = bandwidthUsage;
+        //this.cpuAllocated = cpuAllocated;
+        this.memoryAllocated = memoryAllocated;
+        this.bandwidthAllocated = bandwidthAllocated;
+        this.timestamp = LocalDateTime.now();
     }
 
     public int getNodeId() {
@@ -69,12 +81,12 @@ public class Node {
         this.cpuAllocated = cpuAllocated;
     }
 
-    public double getBandwithUsage() {
-        return bandwithUsage;
+    public double getBandwidthUsage() {
+        return bandwidthUsage;
     }
 
-    public void setBandwithUsage(double bandwithUsage) {
-        this.bandwithUsage = bandwithUsage;
+    public void setBandwidthUsage(double bandwidthUsage) {
+        this.bandwidthUsage = bandwidthUsage;
     }
 
     public LocalDateTime getTimestamp() {
@@ -85,12 +97,12 @@ public class Node {
         this.timestamp = timestamp;
     }
 
-    public double getBandwithAllocated() {
-        return bandwithAllocated;
+    public double getBandwidthAllocated() {
+        return bandwidthAllocated;
     }
 
-    public void setBandwithAllocated(double bandwithAllocated) {
-        this.bandwithAllocated = bandwithAllocated;
+    public void setBandwidthAllocated(double bandwidthAllocated) {
+        this.bandwidthAllocated = bandwidthAllocated;
     }
 
     public double getMemoryAllocated() {
@@ -99,5 +111,21 @@ public class Node {
 
     public void setMemoryAllocated(double memoryAllocated) {
         this.memoryAllocated = memoryAllocated;
+    }
+
+    @Override
+    public String toString() {
+        setTimestamp(LocalDateTime.now());
+        return "Node{" +
+                "nodeId=" + nodeId +
+                ", networkId=" + networkId +
+                ", cpuUsage=" + cpuUsage +
+                ", memoryUsage=" + memoryUsage +
+                ", bandwidthUsage=" + bandwidthUsage +
+                ", cpuAllocated=" + cpuAllocated +
+                ", memoryAllocated=" + memoryAllocated +
+                ", bandwidthAllocated=" + bandwidthAllocated +
+                ", timestamp=" + timestamp +
+                '}';
     }
 }
