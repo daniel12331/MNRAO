@@ -10,6 +10,6 @@ public class MnraoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MnraoApplication.class, args);
 		RUDataSimulator ruds = new RUDataSimulator();
-		ruds.generateNodeData();
+		ruds.scheduleNodeData();
 	}
 }
