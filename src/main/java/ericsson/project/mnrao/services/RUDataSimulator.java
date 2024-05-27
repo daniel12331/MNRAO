@@ -6,8 +6,11 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Random;
 
+@Slf4j
 @Service
 public class RUDataSimulator {
 
@@ -62,6 +65,7 @@ public class RUDataSimulator {
         node.setBandwidthUsage(Math.round(Math.min(generateUsage(node.getBandwidthUsage(), node.getBandwidthAllocated()), node.getBandwidthAllocated())));
 
         kafkaTemplate.send("node-topic", "taskId", node);
+        log.info(String.valueOf(node));
     }
 
     private double generateUsage(double lastUsage, double allocated) {
