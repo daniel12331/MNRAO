@@ -1,16 +1,20 @@
 package ericsson.project.mnrao.services;
 
 import ericsson.project.mnrao.models.Node;
+import ericsson.project.mnrao.repos.RecommendedMsgRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.lang.reflect.Field;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith(MockitoExtension.class)
 public class OptimizerModuleTest {
 
     private static final int NODE_ID = 1;
@@ -20,7 +24,10 @@ public class OptimizerModuleTest {
     private static final double MEMORY_ALLOCATED = 100.0;
     private static final double CPU_USAGE = 50.0;
     private static final double CPU_ALLOCATED = 100.0;
-    
+
+    @Mock
+    private RecommendedMsgRepo recommendedMsgRepo;
+
     @Mock
     private RUDataSimulator ruDataSimulator;
 
@@ -32,7 +39,7 @@ public class OptimizerModuleTest {
     @BeforeEach
     public void setUp() throws NoSuchFieldException, IllegalAccessException {
         MockitoAnnotations.initMocks(this);
-        optimizerModule = new OptimizerModule();
+        optimizerModule = new OptimizerModule(recommendedMsgRepo);
         optimizerModule.ruDataSimulator = ruDataSimulator;
 
         nodesArray = new Node[5];
@@ -101,11 +108,13 @@ public class OptimizerModuleTest {
         assertNodeAllocation(110.00, NodeType.BANDWIDTH);
     }
 
+
     @Test
     public void testIncreaseMemoryAllocation() throws NoSuchFieldException, IllegalAccessException {
         Node node = createTestNode(MEMORY_USAGE, MEMORY_ALLOCATED, NodeType.MEMORY);
         optimizerModule.increaseMemoryAllocation(node);
         assertNodeAllocation(75.00, NodeType.MEMORY);
+
     }
 
     @Test

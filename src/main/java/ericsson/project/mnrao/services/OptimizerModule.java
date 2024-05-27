@@ -31,8 +31,11 @@ public class OptimizerModule {
     @Autowired
     RUDataSimulator ruDataSimulator;
 
-    @Autowired
-    RecommendedMsgRepo recommendedMsgRepo;
+    private final RecommendedMsgRepo recommendedMsgRepo;
+
+    public OptimizerModule(RecommendedMsgRepo recommendedMsgRepo) {
+        this.recommendedMsgRepo = recommendedMsgRepo;
+    }
 
     @KafkaListener(topics = {"node-topic"}, groupId = "task-group")
     public void consume(Node node){

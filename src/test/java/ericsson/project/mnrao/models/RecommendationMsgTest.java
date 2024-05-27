@@ -8,22 +8,23 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RecommendationMsgTest {
 
-    private static final Long DEFAULT_ID = 1L;
-    private static final int DEFAULT_WARNING_TYPE = 2;
-    private static final String DEFAULT_DESCRIPTION = "Test Description";
+    private static final long DEFAULT_ID = 1L;
+    private static final int DEFAULT_NODEID = 1;
+    private final WARNINGTYPE DEFAULT_WARNING_TYPE = ericsson.project.mnrao.models.WARNINGTYPE.WARNING;
     private static final String DEFAULT_RECOMMENDATION = "Test Recommendation";
+    private final RESOURCE DEFAULT_RESOURCE_TYPE = ericsson.project.mnrao.models.RESOURCE.CPU;
 
-    private static final Long UPDATED_ID = 2L;
-    private static final int UPDATED_WARNING_TYPE = 3;
-    private static final String UPDATED_DESCRIPTION = "Updated Description";
+    private static final long UPDATED_ID = 2L;
+    private static final int UPDATED_NODEID = 2;
+    private final WARNINGTYPE UPDATED_WARNING_TYPE = ericsson.project.mnrao.models.WARNINGTYPE.DANGER;
     private static final String UPDATED_RECOMMENDATION = "Updated Recommendation";
+    private final RESOURCE UPDATED_RESOURCE_TYPE = ericsson.project.mnrao.models.RESOURCE.MEMORY;
 
     private RecommendationMsg recommendationMsg;
 
     @BeforeEach
     void setUp() {
-        recommendationMsg = new RecommendationMsg(DEFAULT_WARNING_TYPE, DEFAULT_DESCRIPTION, DEFAULT_RECOMMENDATION);
-        recommendationMsg.setId(DEFAULT_ID);
+        recommendationMsg = new RecommendationMsg(DEFAULT_NODEID, DEFAULT_WARNING_TYPE, DEFAULT_RECOMMENDATION, DEFAULT_RESOURCE_TYPE);
     }
 
     @Test
@@ -34,8 +35,7 @@ class RecommendationMsgTest {
 
     @Test
     void testParameterizedConstructor() {
-        assertEquals(DEFAULT_WARNING_TYPE, recommendationMsg.getWarningType());
-        assertEquals(DEFAULT_DESCRIPTION, recommendationMsg.getDescription());
+        assertEquals(DEFAULT_WARNING_TYPE.toString(), recommendationMsg.getWarningType());
         assertEquals(DEFAULT_RECOMMENDATION, recommendationMsg.getRecommendation());
     }
 
@@ -45,10 +45,7 @@ class RecommendationMsgTest {
         assertEquals(UPDATED_ID, recommendationMsg.getId());
 
         recommendationMsg.setWarningType(UPDATED_WARNING_TYPE);
-        assertEquals(UPDATED_WARNING_TYPE, recommendationMsg.getWarningType());
-
-        recommendationMsg.setDescription(UPDATED_DESCRIPTION);
-        assertEquals(UPDATED_DESCRIPTION, recommendationMsg.getDescription());
+        assertEquals(UPDATED_WARNING_TYPE.toString(), recommendationMsg.getWarningType());
 
         recommendationMsg.setRecommendation(UPDATED_RECOMMENDATION);
         assertEquals(UPDATED_RECOMMENDATION, recommendationMsg.getRecommendation());
