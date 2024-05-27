@@ -1,4 +1,4 @@
-package ericsson.project.mnrao.repos;
+/*package ericsson.project.mnrao.repos;
 
 import ericsson.project.mnrao.models.RecommendationMsg;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,3 +11,4 @@ public interface RecommendedMsgRepo extends JpaRepository<RecommendationMsg, Lon
 
     List<Object []> findAllByNodeIdAndResource(int nodeId, String resource);
 }
+*/
