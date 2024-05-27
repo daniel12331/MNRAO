@@ -58,8 +58,8 @@ $(document).ready(function(){
             onClick: function(event, elements) {
                 if (elements.length > 0) {
                     var index = elements[0]._index;
-                    var networkID = labels[index];
-                    hideAndShowGraph("showRec", networkID)
+                    var nodeId = labels[index];
+                    hideAndShowGraph("showRec", nodeId, "CPU")
                 }
             }
         }
@@ -98,20 +98,11 @@ $(document).ready(function(){
                 fontSize: 36,
                 fontColor: 'black'
             },
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Node ID',
-
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Usage (%)'
-                    },
-                    beginAtZero: true
+            onClick: function(event, elements) {
+                if (elements.length > 0) {
+                    var index = elements[0]._index;
+                    var nodeId = labels[index];
+                    hideAndShowGraph("showRec", nodeId, "MEMORY")
                 }
             }
         }
@@ -150,20 +141,11 @@ $(document).ready(function(){
                 fontSize: 36,
                 fontColor: 'black'
             },
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Node ID',
-
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Usage (%)'
-                    },
-                    beginAtZero: true
+            onClick: function(event, elements) {
+                if (elements.length > 0) {
+                    var index = elements[0]._index;
+                    var nodeId = labels[index];
+                    hideAndShowGraph("showRec", nodeId, "BANDWIDTH")
                 }
             }
         }
@@ -217,17 +199,52 @@ $(document).ready(function(){
     $('#RecPage').hide()
     // hideAndShowGraph("showRec", 1)
 });
-function hideAndShowGraph(option, networkId){
+function hideAndShowGraph(option, nodeId, resource){
     if (option === "showRec"){
         $('#carouselExample').hide()
         $('#RecPage').show()
-        $('#recTitle').html('Resource Allocation Recommendations for Network ID: ' + networkId)
+        populateRecPage(nodeId, resource)
+        $('#recTitle').html('Resource Allocation Recommendations for Network ID: ' + nodeId)
     }else{
         $('#carouselExample').show()
         $('#RecPage').hide()
 
     }
 }
-function drillDownToNetwork(nodeID){
-
+function populateRecPage(nodeId, resource){
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8081/recommendations/getRecommendations/' + nodeId + '/' + resource,
+        dataType: "json",
+        success: function (response) {
+            $('#tableBody').empty()
+            response.forEach(function(item) {
+                console.log(item)
+                if(item[0].warningType == "DANGER") {
+                    $('#tableBody').append(
+                        '<tr class="table-danger">' +
+                        '<th scope="row">' + item[0].warningType + '</th>' +
+                        '<td>'+ item[0].recommendation +'</td>' +
+                        '</tr>'
+                    )
+                }
+                else if(item[0].warningType == "WARNING") {
+                    $('#tableBody').append(
+                        '<tr class="table-warning">' +
+                        '<th scope="row">' + item[0].warningType + '</th>' +
+                        '<td>'+ item[0].recommendation +'</td>' +
+                        '</tr>'
+                    )
+                }
+                else if(item[0].warningType == "INFO") {
+                    $('#tableBody').append(
+                        '<tr class="table-info">' +
+                        '<th scope="row">' + item[0].warningType + '</th>' +
+                        '<td>'+ item[0].recommendation +'</td>' +
+                        '</tr>'
+                    )
+                }
+            });
+        }
+    });
 }
