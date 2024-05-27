@@ -1,13 +1,6 @@
 package ericsson.project.mnrao.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-
+import javax.persistence.*;
 
 @Entity
 @Table(name = "recommendation_msg")
@@ -18,22 +11,28 @@ public class RecommendationMsg {
     private Long id;
 
     @Column
-    private int warningType;
+    private int nodeId;
 
     @Column
-    private String description;
+    private String warningType;
 
     @Column
     private String recommendation;
+
+
+    @Column
+    private String resource;
+
 
     public RecommendationMsg() {
 
     }
 
-    public RecommendationMsg(int warningType, String description, String recommendation) {
-        this.warningType = warningType;
-        this.description = description;
+    public RecommendationMsg(int nodeId, WARNINGTYPE warningType, String recommendation, RESOURCE resource) {
+        this.nodeId = nodeId;
+        this.warningType = warningType.toString();
         this.recommendation = recommendation;
+        this.resource = resource.toString();
     }
 
     public Long getId() {
@@ -44,20 +43,20 @@ public class RecommendationMsg {
         this.id = id;
     }
 
-    public int getWarningType() {
+    public int getNodeId() {
+        return nodeId;
+    }
+
+    public void setNodeId(int nodeId) {
+        this.nodeId = nodeId;
+    }
+
+    public String getWarningType() {
         return warningType;
     }
 
-    public void setWarningType(int warningType) {
-        this.warningType = warningType;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setWarningType(WARNINGTYPE warningType) {
+        this.warningType = warningType.toString();
     }
 
     public String getRecommendation() {
@@ -66,5 +65,13 @@ public class RecommendationMsg {
 
     public void setRecommendation(String recommendation) {
         this.recommendation = recommendation;
+    }
+
+    public String getResource() {
+        return resource;
+    }
+
+    public void setResource(RESOURCE resource) {
+        this.resource = resource.toString();
     }
 }
