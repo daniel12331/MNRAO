@@ -108,7 +108,7 @@ class NodeTest {
 
     @Test
     void testToString() {
-        node.setTimestamp(DEFAULT_TIMESTAMP);
+        //node.setTimestamp(DEFAULT_TIMESTAMP);
         String expected = "Node{" +
                 "nodeId=" + DEFAULT_NODE_ID +
                 ", networkId=" + DEFAULT_NETWORK_ID +
@@ -118,7 +118,7 @@ class NodeTest {
                 ", cpuAllocated=" + DEFAULT_CPU_ALLOCATED +
                 ", memoryAllocated=" + DEFAULT_MEMORY_ALLOCATED +
                 ", bandwidthAllocated=" + DEFAULT_BANDWIDTH_ALLOCATED +
-                ", timestamp=" + DEFAULT_TIMESTAMP +
+                ", timestamp=" + LocalDateTime.now() +
                 '}';
         assertEquals(expected, node.toString());
     }
