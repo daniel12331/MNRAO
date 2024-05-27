@@ -155,8 +155,61 @@ public class OptimizerModuleTest {
         optimizerModule.analyseNodeCPU(node); // Simulate reaching the threshold for increase
         assertNodeAllocation(115.00, NodeType.CPU);
     }
+    @Test
+    public void testAnalyseNodeBandwidthIncrease() throws NoSuchFieldException, IllegalAccessException {
+        Node node = createTestNode(190.0, BANDWIDTH_ALLOCATED, NodeType.BANDWIDTH);
+        optimizerModule.analyseNodeBandwidth(node);
+        optimizerModule.analyseNodeBandwidth(node); // Simulate reaching the threshold for increase
+        optimizerModule.analyseNodeBandwidth(node); // Simulate reaching the threshold for increase
+        assertNodeAllocation(215.00, NodeType.BANDWIDTH);
+    }
+
+    @Test
+    public void testAnalyseNodeBandwidthDecrease() throws NoSuchFieldException, IllegalAccessException {
+        Node node = createTestNode(50.0, BANDWIDTH_ALLOCATED, NodeType.BANDWIDTH);
+        optimizerModule.analyseNodeBandwidth(node);
+        optimizerModule.analyseNodeBandwidth(node); // Simulate reaching the threshold for decrease
+        optimizerModule.analyseNodeBandwidth(node); // Simulate reaching the threshold for decrease
+        assertNodeAllocation(60.00, NodeType.BANDWIDTH);
+    }
+
+    @Test
+    public void testAnalyseNodeMemoryDecrease() throws NoSuchFieldException, IllegalAccessException {
+        Node node = createTestNode(20.0, MEMORY_ALLOCATED, NodeType.MEMORY);
+        optimizerModule.analyseNodeMemory(node);
+        optimizerModule.analyseNodeMemory(node); // Simulate reaching the threshold for decrease
+        optimizerModule.analyseNodeMemory(node); // Simulate reaching the threshold for decrease
+        assertNodeAllocation(30.00, NodeType.MEMORY);
+    }
+
+    @Test
+    public void testAnalyseNodeCPUIncrease() throws NoSuchFieldException, IllegalAccessException {
+        Node node = createTestNode(90.0, CPU_ALLOCATED, NodeType.CPU);
+        optimizerModule.analyseNodeCPU(node);
+        optimizerModule.analyseNodeCPU(node); // Simulate reaching the threshold for increase
+        optimizerModule.analyseNodeCPU(node); // Simulate reaching the threshold for increase
+        assertNodeAllocation(115.00, NodeType.CPU);
+    }
+
+    @Test
+    public void testAnalyseNodeCPUDecrease() throws NoSuchFieldException, IllegalAccessException {
+        Node node = createTestNode(20.0, CPU_ALLOCATED, NodeType.CPU);
+        optimizerModule.analyseNodeCPU(node);
+        optimizerModule.analyseNodeCPU(node); // Simulate reaching the threshold for decrease
+        optimizerModule.analyseNodeCPU(node); // Simulate reaching the threshold for decrease
+        assertNodeAllocation(30.00, NodeType.CPU);
+    }
+    @Test
+    public void testAnalyseNodeMemoryIncrease() throws NoSuchFieldException, IllegalAccessException {
+    	Node node = createTestNode(90.0, MEMORY_ALLOCATED, NodeType.MEMORY);
+    	optimizerModule.analyseNodeMemory(node);
+    	optimizerModule.analyseNodeMemory(node); // Simulate reaching the threshold for increase
+    	optimizerModule.analyseNodeMemory(node); // Simulate reaching the threshold for increase
+    	assertNodeAllocation(115.00, NodeType.MEMORY);
+    }
 
     private enum NodeType {
         BANDWIDTH, MEMORY, CPU
     }
+
 }
