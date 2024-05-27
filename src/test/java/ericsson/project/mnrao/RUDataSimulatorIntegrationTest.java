@@ -29,7 +29,7 @@ public class RUDataSimulatorIntegrationTest {
         Node node5 = new Node(5, 105, 10.0, 10.0, 10.0, 50.0, 50.0, 50.0);
 
         // When
-        Thread.sleep(10000); // Wait for nodes to be scheduled for some time
+        Thread.sleep(10000);
 
         // Then
         verify(kafkaTemplate, atLeast(2)).send(eq("node-topic"), eq("taskId"), any(Node.class));
