@@ -24,6 +24,5 @@ public class MnraoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MnraoApplication.class, args);
-
 	}
 }

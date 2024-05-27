@@ -115,7 +115,8 @@ public class Node {
 
     @Override
     public String toString() {
-        setTimestamp(LocalDateTime.now());
+      setTimestamp(LocalDateTime.now());
+
         return "Node{" +
                 "nodeId=" + nodeId +
                 ", networkId=" + networkId +
@@ -129,3 +130,4 @@ public class Node {
                 '}';
     }
 }
+
