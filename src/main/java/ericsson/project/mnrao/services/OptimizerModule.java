@@ -1,12 +1,8 @@
 package ericsson.project.mnrao.services;
 
 import ericsson.project.mnrao.models.Node;
-import jdk.jfr.Threshold;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -31,11 +27,15 @@ public class OptimizerModule {
     @Autowired
     RUDataSimulator ruDataSimulator;
 
+//    @Autowired
+//    RecommendedMsgRepo recommendedMsgRepo;
+
     @KafkaListener(topics = {"node-topic"}, groupId = "task-group")
     public void consume(Node node){
         analyseNodeCPU(node);
         analyseNodeMemory(node);
         analyseNodeBandwidth(node);
+
     }
 
     // NODE BANDWIDTH ANALYSES //////////////////////////////////////////////////////////////////////////////////////////
@@ -136,5 +136,6 @@ public class OptimizerModule {
         System.out.println("Reducing: " + node);
         cpuFlagDecrease.put(node.getNodeId(), 0);
         ruDataSimulator.nodes[node.getNodeId() - 1].setCpuAllocated(node.getCpuUsage() + 10.00);
+//        recommendedMsgRepo.save(new RecommendationMsg());
     }
 }

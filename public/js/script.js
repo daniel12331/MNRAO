@@ -55,19 +55,11 @@ $(document).ready(function(){
                 fontSize: 36,
                 fontColor: 'black'
             },
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Node ID'
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Usage (%)'
-                    },
-                    beginAtZero: true
+            onClick: function(event, elements) {
+                if (elements.length > 0) {
+                    var index = elements[0]._index;
+                    var networkID = labels[index];
+                    hideAndShowGraph("showRec", networkID)
                 }
             }
         }
@@ -222,4 +214,20 @@ $(document).ready(function(){
     }
 
     webSocketInvoke();
+    $('#RecPage').hide()
+    // hideAndShowGraph("showRec", 1)
 });
+function hideAndShowGraph(option, networkId){
+    if (option === "showRec"){
+        $('#carouselExample').hide()
+        $('#RecPage').show()
+        $('#recTitle').html('Resource Allocation Recommendations for Network ID: ' + networkId)
+    }else{
+        $('#carouselExample').show()
+        $('#RecPage').hide()
+
+    }
+}
+function drillDownToNetwork(nodeID){
+
+}
