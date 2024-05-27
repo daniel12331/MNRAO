@@ -1,4 +1,4 @@
-package ericsson.project.mnrao.repos;
+/*package ericsson.project.mnrao.repos;
 
 import ericsson.project.mnrao.models.RecommendationMsg;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,3 +9,4 @@ import org.springframework.stereotype.Repository;
 public interface RecommendedMsgRepo extends JpaRepository<RecommendationMsg, Long> {
 
 }
+*/
