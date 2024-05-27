@@ -69,7 +69,7 @@ public class RUDataSimulator {
         kafkaTemplate.send("node-topic", "taskId", node);
     }
 
-    private double generateUsage(double lastUsage, double allocated) {
+    public double generateUsage(double lastUsage, double allocated) {
         double variation = 5.0; // Possibly better set a little higher?
         double newUsage = lastUsage + (random.nextDouble() * 2 * variation - variation);
         return Math.max(0, Math.min(newUsage, allocated));
