@@ -1,6 +1,7 @@
 package ericsson.project.mnrao.models;
 
 import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -17,7 +18,6 @@ class NodeTest {
     private static final double DEFAULT_CPU_ALLOCATED = 50.0;
     private static final double DEFAULT_MEMORY_ALLOCATED = 60.0;
     private static final double DEFAULT_BANDWIDTH_ALLOCATED = 70.0;
-    private static final LocalDateTime DEFAULT_TIMESTAMP = LocalDateTime.of(2023, 1, 1, 12, 0, 0);
 
     private static final int ANOTHER_NODE_ID = 2;
     private static final int ANOTHER_NETWORK_ID = 202;
