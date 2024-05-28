@@ -18,7 +18,7 @@ public class MainController {
 
 
     @GetMapping("/getRecommendations/{nodeId}/{resource}")
-    public List<Object[]> getUniqueCauseCodesPerImsi(@PathVariable("nodeId") int nodeId, @PathVariable("resource") String resource){
+    public List<Object[]> getAllRecommendations(@PathVariable("nodeId") int nodeId, @PathVariable("resource") String resource){
         List<Object []> result = null;
         result = recommendedMsgRepo.findAllByNodeIdAndResource(nodeId, resource);
 
