@@ -49,17 +49,32 @@ public class OptimizerModule {
     public void analyseNodeBandwidth(Node node) {
         if(node.getBandwidthUsage() + THRESHOLD >= node.getBandwidthAllocated()){
             System.out.println(node.getNodeId() + " Node may need more resources Bandwidth Usage: " + node.getBandwidthUsage() + " Bandwidth Allocated: " + node.getBandwidthAllocated());
+            recommendedMsgRepo.save(new RecommendationMsg(node.getNodeId(), WARNINGTYPE.WARNING,
+                    "Node may need more resources Bandwidth Usage: "  +
+                            node.getBandwidthUsage() + " Bandwidth Allocated: " +
+                            node.getBandwidthAllocated() + " Timestamp: " + node.getTimestamp(), RESOURCE.BANDWIDTH));
             bandFlagIncrease.merge(node.getNodeId(), 1, Integer::sum);
 
             if(bandFlagIncrease.get(node.getNodeId()) == BAND_INCREASE_FLAG){
+                recommendedMsgRepo.save(new RecommendationMsg(node.getNodeId(), WARNINGTYPE.DANGER,
+                        "Danger warning that node needs more resources Bandwidth Usage: "  +
+                                node.getBandwidthUsage() + " Bandwidth Allocated: " +
+                                node.getBandwidthAllocated() + " Timestamp: " + node.getTimestamp(), RESOURCE.BANDWIDTH));
                 increaseBandwidthAllocation(node);
             }
 
         } else if (node.getBandwidthUsage() + THRESHOLD <= node.getBandwidthAllocated()) {
             System.out.println(node.getNodeId() + " Node may need less resources Bandwidth Usage: " + node.getBandwidthUsage() + " Bandwidth Allocated: " + node.getBandwidthAllocated());
+            recommendedMsgRepo.save(new RecommendationMsg(node.getNodeId(), WARNINGTYPE.WARNING,
+                    "Node may need less resources Bandwidth Usage: "  +
+                            node.getBandwidthUsage() + " Bandwidth Allocated: " +
+                            node.getBandwidthAllocated() + " Timestamp: " + node.getTimestamp(), RESOURCE.BANDWIDTH));
             bandFlagDecrease.merge(node.getNodeId(), 1, Integer::sum);
-
             if(bandFlagDecrease.get(node.getNodeId()) == BAND_DECREASE_FLAG){
+                recommendedMsgRepo.save(new RecommendationMsg(node.getNodeId(), WARNINGTYPE.DANGER,
+                        "Danger warning that node needs less resources Bandwidth Usage: "  +
+                                node.getBandwidthUsage() + " Bandwidth Allocated: " +
+                                node.getBandwidthAllocated() + " Timestamp: " + node.getTimestamp(), RESOURCE.BANDWIDTH));
                 decreaseBandwidthAllocation(node);
             }
         }
@@ -69,6 +84,10 @@ public class OptimizerModule {
         System.out.println("Increasing: " + node);
         bandFlagIncrease.put(node.getNodeId(), 0);
         ruDataSimulator.nodes[node.getNodeId() - 1].setBandwidthAllocated(node.getBandwidthUsage() + 25.00);
+        recommendedMsgRepo.save(new RecommendationMsg(node.getNodeId(), WARNINGTYPE.INFO,
+                "Optimizer Invoked Bandwidth Usage: "  +
+                        node.getBandwidthUsage() + " Bandwidth Allocated: " +
+                        node.getMemoryAllocated() + " Timestamp: " + node.getTimestamp(), RESOURCE.BANDWIDTH));
     }
 
     public void decreaseBandwidthAllocation(Node node) {
@@ -76,6 +95,10 @@ public class OptimizerModule {
         System.out.println("Reducing: " + node);
         bandFlagDecrease.put(node.getNodeId(), 0);
         ruDataSimulator.nodes[node.getNodeId() - 1].setBandwidthAllocated(node.getBandwidthUsage() + 10.00);
+        recommendedMsgRepo.save(new RecommendationMsg(node.getNodeId(), WARNINGTYPE.INFO,
+                "Optimizer Invoked Bandwidth Usage: "  +
+                        node.getBandwidthUsage() + " Bandwidth Allocated: " +
+                        node.getMemoryAllocated() + " Timestamp: " + node.getTimestamp(), RESOURCE.BANDWIDTH));
     }
 
 
