@@ -21,26 +21,70 @@
         <h1 style="color: white;">Mobile Network Resource Allocation Optimizer</h1>
     </div>
 </nav>
-<div id="carouselExample" class="carousel slide">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <canvas id="cpuChart" class="d-block mx-auto" style="max-height: 900px; max-width: 1300px"></canvas>
+<div class="container" style="padding-top: 3em" id="radios">
+    <div class="row">
+        <div class="col-sm">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked onclick="changeLineOrBar('bar')">
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Bar Chart
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onclick="changeLineOrBar('line')">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    Line Chart
+                </label>
+            </div>
         </div>
-        <div class="carousel-item">
-            <canvas id="memoryChart" class="d-block mx-auto" style="max-height: 1080px; max-width: 1300px"></canvas>
+        <div class="col-sm">
         </div>
-        <div class="carousel-item">
-            <canvas id="bandChart" class="d-block mx-auto" style="max-height: 1080px; max-width: 1300px"></canvas>
+        <div class="col-sm">
+        </div>
+        <div class="col-sm">
+        </div>
+        <div class="col-sm">
+        </div>
+        <div class="col-sm">
+        </div>
+        <div class="col-sm">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault3" checked onclick="changeSlideOrSimple('slideShow')">
+                <label class="form-check-label" for="flexRadioDefault3">
+                    Slide Show
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault4" onclick="changeSlideOrSimple('onePage')">
+                <label class="form-check-label" for="flexRadioDefault4">
+                    One Page
+                </label>
+            </div>
         </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" style="background-color: transparent; border: none;">
-        <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: black;"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next" style="background-color: transparent; border: none;">
-        <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: black;"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+</div>
+<div id="graphs">
+    <div id="carouselExample" class="carousel slide">
+        <div id="carouselInner" class="carousel-inner">
+            <div id="item1" class="carousel-item active">
+                <canvas id="cpuChart" class="d-block mx-auto" style="max-height: 900px; max-width: 1300px"></canvas>
+            </div>
+            <div id="item2" class="carousel-item">
+                <canvas id="memoryChart" class="d-block mx-auto" style="max-height: 1080px; max-width: 1300px"></canvas>
+            </div>
+            <div id="item3" class="carousel-item">
+                <canvas id="bandChart" class="d-block mx-auto" style="max-height: 1080px; max-width: 1300px"></canvas>
+            </div>
+        </div>
+        <button id="nextBtn" class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" style="background-color: transparent; border: none;">
+            <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: black;"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button id="prevBtn" class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next" style="background-color: transparent; border: none;">
+            <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: black;"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 </div>
 <div id="RecPage">
     <button style="margin-left:10em; margin-top:5em;" id="backBar" type="button" class="btn btn-outline-danger" onclick="hideAndShowGraph('hideRec')">

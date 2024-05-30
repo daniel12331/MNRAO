@@ -87,7 +87,7 @@ public class OptimizerModule {
         recommendedMsgRepo.save(new RecommendationMsg(node.getNodeId(), WARNINGTYPE.INFO,
                 "Optimizer Invoked Bandwidth Usage: "  +
                         node.getBandwidthUsage() + " Bandwidth Allocated: " +
-                        node.getMemoryAllocated() + " Timestamp: " + node.getTimestamp(), RESOURCE.BANDWIDTH));
+                        (node.getBandwidthUsage() + 25.00) + " Timestamp: " + node.getTimestamp(), RESOURCE.BANDWIDTH));
     }
 
     public void decreaseBandwidthAllocation(Node node) {
@@ -98,7 +98,7 @@ public class OptimizerModule {
         recommendedMsgRepo.save(new RecommendationMsg(node.getNodeId(), WARNINGTYPE.INFO,
                 "Optimizer Invoked Bandwidth Usage: "  +
                         node.getBandwidthUsage() + " Bandwidth Allocated: " +
-                        node.getMemoryAllocated() + " Timestamp: " + node.getTimestamp(), RESOURCE.BANDWIDTH));
+                        (node.getBandwidthUsage() + 10.00) + " Timestamp: " + node.getTimestamp(), RESOURCE.BANDWIDTH));
     }
 
 
@@ -143,7 +143,7 @@ public class OptimizerModule {
         recommendedMsgRepo.save(new RecommendationMsg(node.getNodeId(), WARNINGTYPE.INFO,
                 "Optimizer Invoked Memory Usage: "  +
                         node.getMemoryUsage() + " Memory Allocated: " +
-                        node.getMemoryAllocated() + " Timestamp: " + node.getTimestamp(), RESOURCE.MEMORY));
+                        (node.getMemoryUsage() + 25.00) + " Timestamp: " + node.getTimestamp(), RESOURCE.MEMORY));
     }
 
     public void decreaseMemoryAllocation(Node node) {
@@ -154,7 +154,7 @@ public class OptimizerModule {
         recommendedMsgRepo.save(new RecommendationMsg(node.getNodeId(), WARNINGTYPE.INFO,
                 "Optimizer Invoked Memory Usage: "  +
                         node.getMemoryUsage() + " Memory Allocated: " +
-                        node.getMemoryAllocated() + " Timestamp: " + node.getTimestamp(), RESOURCE.MEMORY));
+                        (node.getMemoryUsage() + 10.00) + " Timestamp: " + node.getTimestamp(), RESOURCE.MEMORY));
     }
 
     // NODE CPU ANALYSES //////////////////////////////////////////////////////////////////////////////////////////
@@ -200,7 +200,7 @@ public class OptimizerModule {
         recommendedMsgRepo.save(new RecommendationMsg(node.getNodeId(), WARNINGTYPE.INFO,
                 "Optimizer Invoked CPU Usage: "  +
                         node.getCpuUsage() + " CPU Allocated: " +
-                        node.getCpuAllocated() + " Timestamp: " + node.getTimestamp(), RESOURCE.CPU));
+                        (node.getCpuUsage() + 25.00) + " Timestamp: " + node.getTimestamp(), RESOURCE.CPU));
     }
 
     public void decreaseCPUAllocation(Node node) {
@@ -211,6 +211,6 @@ public class OptimizerModule {
         recommendedMsgRepo.save(new RecommendationMsg(node.getNodeId(), WARNINGTYPE.INFO,
                 "Optimizer Invoked CPU Usage: "  +
                         node.getCpuUsage() + " CPU Allocated: " +
-                        node.getCpuAllocated() + " Timestamp: " + node.getTimestamp(), RESOURCE.CPU));
+                        (node.getCpuUsage() + 10.00) + " Timestamp: " + node.getTimestamp(), RESOURCE.CPU));
     }
 }

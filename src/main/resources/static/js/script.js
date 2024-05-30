@@ -1,3 +1,7 @@
+let cpuUsageChart = null;
+let memUsageChart = null;
+let bandUsageChart = null;
+
 $(document).ready(function(){
     const myCarouselElement = document.querySelector('#carouselExample')
 
@@ -23,8 +27,8 @@ $(document).ready(function(){
     const bandAllocationData = data.map(d => d.bandwidthAllocated);
 
     const cpuctx = document.getElementById('cpuChart').getContext('2d');
-    const cpuUsageChart = new Chart(cpuctx, {
-        type: 'line',
+    cpuUsageChart = new Chart(cpuctx, {
+        type: 'bar',
         data: {
             labels: labels,
             datasets: [
@@ -66,8 +70,8 @@ $(document).ready(function(){
     });
 
     const memctx = document.getElementById('memoryChart').getContext('2d');
-    const memUsageChart = new Chart(memctx, {
-        type: 'line',
+    memUsageChart = new Chart(memctx, {
+        type: 'bar',
         data: {
             labels: labels,
             datasets: [
@@ -109,8 +113,8 @@ $(document).ready(function(){
     });
 
     const bandctx = document.getElementById('bandChart').getContext('2d');
-    const bandUsageChart = new Chart(bandctx, {
-        type: 'line',
+    bandUsageChart = new Chart(bandctx, {
+        type: 'bar',
         data: {
             labels: labels,
             datasets: [
@@ -198,15 +202,18 @@ $(document).ready(function(){
     webSocketInvoke();
     $('#RecPage').hide()
     // hideAndShowGraph("showRec", 1)
+
 });
 function hideAndShowGraph(option, nodeId, resource){
     if (option === "showRec"){
-        $('#carouselExample').hide()
+        $('#graphs').hide()
+        $('#radios').hide()
         $('#RecPage').show()
         populateRecPage(nodeId, resource)
-        $('#recTitle').html('Resource Allocation Recommendations for Network ID: ' + nodeId)
+        $('#recTitle').html('Resource Allocation Recommendations for Node ID: ' + nodeId)
     }else{
-        $('#carouselExample').show()
+        $('#radios').show()
+        $('#graphs').show()
         $('#RecPage').hide()
 
     }
@@ -219,7 +226,6 @@ function populateRecPage(nodeId, resource){
         success: function (response) {
             $('#tableBody').empty()
             response.forEach(function(item) {
-                console.log(item)
                 if(item[0].warningType == "DANGER") {
                     $('#tableBody').append(
                         '<tr class="table-danger">' +
@@ -247,4 +253,42 @@ function populateRecPage(nodeId, resource){
             });
         }
     });
+}
+
+function changeLineOrBar(option){
+    if(option === "bar"){
+        cpuUsageChart.config.type = "bar"
+        memUsageChart.config.type = "bar"
+        bandUsageChart.config.type = "bar"
+    }
+    if(option === "line"){
+        cpuUsageChart.config.type = "line"
+        memUsageChart.config.type = "line"
+        bandUsageChart.config.type = "line"
+    }
+    cpuUsageChart.update()
+    memUsageChart.update()
+    bandUsageChart.update()
+}
+
+function changeSlideOrSimple(option){
+    if(option === "onePage"){
+        $("#carouselExample").removeClass("carousel slide");
+        $("#carouselInner").removeClass("carousel-inner");
+        $("#item1").removeClass("carousel-item active");
+        $("#item2").removeClass("carousel-item active");
+        $("#item3").removeClass("carousel-item active");
+        $("#nextBtn").hide();
+        $("#prevBtn").hide();
+
+    }
+    if (option === "slideShow") {
+        $("#carouselExample").addClass("carousel slide");
+        $("#carouselInner").addClass("carousel-inner");
+        $("#item1").addClass("carousel-item active");
+        $("#item2").addClass("carousel-item");
+        $("#item3").addClass("carousel-item");
+        $("#nextBtn").show();
+        $("#prevBtn").show();
+    }
 }
